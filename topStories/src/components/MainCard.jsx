@@ -16,7 +16,7 @@ const MainCard = () => {
             const {sections}  = await apiRes.json();
             // console.log("sections",sections)
             let {cards} = sections[1]
-            let {subCards}=cards[29]
+            let {subCards}=cards[28]
             setNews(subCards)
             setLoading(false)
         }catch(err){
@@ -31,7 +31,7 @@ const MainCard = () => {
     },[])
     return (
         <div style={{backgroundColor:"gray"}}>
-            <Card sx={{width:"300px",height:"304px"}}>
+            <Card sx={{width:"300px",height:"304px",backgroundColor:"orange"}}>
                 <CardHeader sx={{paddingTop:"3px"}}
                     avatar={
                         <Avatar sx={{height:"20px",width:"16px"}} src='https://assets.msn.com/staticsb/statics//latest/icons/NtpTopStories.svg'/>
@@ -48,7 +48,7 @@ const MainCard = () => {
                         </IconButton>
                     }
                 />
-                <CardContent>
+                <CardContent sx={{padding:"2px"}}>
                     {(news&&(!error))&&news.map((eachNews)=>{
                        return <SubCards key={eachNews.id} news={eachNews} />
                     })}
