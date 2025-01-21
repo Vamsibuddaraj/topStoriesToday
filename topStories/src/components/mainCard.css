@@ -1,0 +1,31 @@
+.arrow:hover  {
+    /* opacity: 1; */
+    /* background-color: aqua; */
+    background-color:rgb(223 226 220 / 100%)
+}
+
+.leftarr{
+    position:absolute;
+    top:45%;
+    height:40px;
+    width:25px;
+    border-radius:4px;
+    background-color:rgb(223 226 220 / 90%)
+}
+
+.visible {
+    display: block;
+}
+.hidden {
+    display: none;
+}
+
+.rightarr {
+position:absolute;
+right:0;
+top:45%;
+height:40px;
+width:25px;
+border-radius:4px;
+background-color:rgb(223 226 220 / 90%)
+}
