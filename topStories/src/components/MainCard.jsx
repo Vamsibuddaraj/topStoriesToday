@@ -41,7 +41,7 @@ const MainCard = () => {
 
     function* processDataRev(news,chunkSize=3){
         for(let i = generatorIter;i>=0;i-=chunkSize){
-            setGeneratorIter(generatorIter-chunkSize)
+            if(generatorIter>3){setGeneratorIter(generatorIter-chunkSize)}
             if(i>chunkSize){
                 yield news.slice(i-chunkSize*2,i-chunkSize)
             }else{
@@ -72,9 +72,9 @@ const MainCard = () => {
             fetchData();
     },[])
     return (
-        <div style={{width:"300px",height:"304px",backgroundColor:"gray",margin:"0 auto"}} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
+        <div style={{width:"300px",height:"304px",margin:"0 auto"}} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
             <Card sx={{width:"300px",height:"304px",
-                backgroundColor:"orange",
+                // backgroundColor:"orange",
                 position:"relative"}}>
                 <CardHeader sx={{paddingTop:"3px"}}
                     avatar={

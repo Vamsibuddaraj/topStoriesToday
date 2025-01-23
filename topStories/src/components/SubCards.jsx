@@ -4,7 +4,7 @@ const SubCards = ({news}) => {
     const {provider:{name,logoUrl},publishedDateTime,title} = news
     // console.log("name",name,"logourl",logoUrl)
     return (
-        <Card sx={{width:"260px", height:"75px", px:"16px",margin:0,borderRadius:0,
+        <Card elevation={0} sx={{width:"260px", height:"75px", px:"16px",margin:0,borderRadius:0,
             "&:hover":{
                 backgroundColor:"#ececec"
             }
