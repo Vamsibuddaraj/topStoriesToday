@@ -4,7 +4,11 @@ const SubCards = ({news}) => {
     const {provider:{name,logoUrl},publishedDateTime,title} = news
     // console.log("name",name,"logourl",logoUrl)
     return (
-        <Card sx={{width:"260px", height:"75px", px:"16px",margin:0}}>
+        <Card sx={{width:"260px", height:"75px", px:"16px",margin:0,borderRadius:0,
+            "&:hover":{
+                backgroundColor:"#ececec"
+            }
+        }}>
             <CardHeader sx={{padding:0,py:"5px"}}
                 title={name} 
                 slotProps={{
