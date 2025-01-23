@@ -22,7 +22,8 @@ const MainCard = () => {
             const {sections}  = await apiRes.json();
             let {cards} = sections[1]
             console.log("sections",cards)
-            let {subCards}=cards[28]
+            let reqCard = cards.find((card)=>card.id==="CanonicalName-topstories")
+            let {subCards}=reqCard
             setNews(subCards)
             setTodayNews(subCards.slice(0,3))
             setLoading(false)
