@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Avatar, CardHeader, IconButton } from '@mui/material';
+import { Avatar, CardActions, CardHeader, IconButton, MobileStepper } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { TOPSTORIES } from '../utils/config';
 import SubCards from './SubCards';
@@ -16,6 +16,7 @@ const MainCard = () => {
     const [loading,setLoading] = useState(true)
     const [openNav,setOpenNav] = useState(false)
     const [generatorIter,setGeneratorIter] = useState(3)
+    const [activeStep,setActiveStep] = useState(0)
     const fetchData = async () => {
         try{
             const apiRes = await fetch(TOPSTORIES);
@@ -35,6 +36,7 @@ const MainCard = () => {
             for(let i = generatorIter;i<news.length;i+=chunkSize){
                 console.log(i,"clicked")
                 setGeneratorIter(generatorIter+chunkSize)
+                setActiveStep(activeStep+1)
                 yield news.slice(i,i+chunkSize)
             }
     }
@@ -43,6 +45,7 @@ const MainCard = () => {
         for(let i = generatorIter;i>=0;i-=chunkSize){
             if(generatorIter>3){setGeneratorIter(generatorIter-chunkSize)}
             if(i>chunkSize){
+                setActiveStep(activeStep-1)
                 yield news.slice(i-chunkSize*2,i-chunkSize)
             }else{
                 yield undefined
@@ -72,7 +75,9 @@ const MainCard = () => {
             fetchData();
     },[])
     return (
-        <div style={{width:"300px",height:"304px",margin:"0 auto"}} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
+        <div style={{width:"300px",height:"304px"
+        // ,margin:"0 auto"
+        }} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
             <Card sx={{width:"300px",height:"304px",
                 // backgroundColor:"orange",
                 position:"relative"}}>
@@ -97,14 +102,33 @@ const MainCard = () => {
                        return <SubCards key={eachNews.id} news={eachNews} />
                     })}
                 </CardContent>
+                <CardActions>
+                    <MobileStepper sx={{
+                        position:"absolute", 
+                        fontSize:"small",
+                        ".MuiMobileStepper-dots":{
+                            alignItems:"center"
+                        },
+                        ".MuiMobileStepper-dot": {
+                            width: 4,
+                            height: 4,
+                        },
+                        ".MuiMobileStepper-dotActive": {
+                            width: 5,
+                            height: 6,
+                            backgroundColor: "black", 
+                        },
+
+                        }} variant='dots' activeStep={activeStep} steps={4}/>
+                </CardActions>
                 <div onClick={prevSet} className={`leftarr arrow ${openNav?"visible":"hidden"}`} >
                         <IconButton disableTouchRipple disableFocusRipple disableRipple sx={{paddingLeft:"0"}}>
-                            <ArrowLeftIcon fontSize='medium'/>
+                            <ArrowLeftIcon sx={{ color: '#000' }} fontSize='medium'/>
                         </IconButton>
                 </div>
                 <div onClick={nextSet} className={`rightarr arrow ${openNav?"visible":"hidden"}`} >
                         <IconButton disableTouchRipple disableFocusRipple disableRipple sx={{paddingLeft:"0"}}>
-                            <ArrowRightIcon color='black' fontSize='medium'/>
+                            <ArrowRightIcon sx={{ color: '#000' }} fontSize='medium'/>
                         </IconButton>
                 </div>
             </Card>
