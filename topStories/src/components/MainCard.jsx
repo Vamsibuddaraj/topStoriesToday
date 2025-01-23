@@ -8,6 +8,7 @@ import SubCards from './SubCards';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import "./mainCard.css"
+import MenuComp from './MenuComp';
 
 const MainCard = () => {
     const [news,setNews] = useState(null)
@@ -17,6 +18,8 @@ const MainCard = () => {
     const [openNav,setOpenNav] = useState(false)
     const [generatorIter,setGeneratorIter] = useState(3)
     const [activeStep,setActiveStep] = useState(0)
+    const [anchorEl,setAnchorEl] = useState(null)
+    const [menuOpen,setMenuOpen] = useState(false)
     const fetchData = async () => {
         try{
             const apiRes = await fetch(TOPSTORIES);
@@ -92,11 +95,12 @@ const MainCard = () => {
                         }
                     }}
                     action={
-                        <IconButton>
-                            <MoreHorizIcon fontSize='small'/>
+                        <IconButton  onClick={(e)=>{setAnchorEl(e.currentTarget),setMenuOpen(true)}}>
+                            <MoreHorizIcon sx={{cursor:"pointer"}} fontSize='small' />
                         </IconButton>
                     }
                 />
+                <MenuComp handleClose={()=>setMenuOpen(false)} isOpen={menuOpen} anchor={anchorEl}/>
                 <CardContent sx={{marginLeft:"2px",padding:"2px"}}>
                     {(todayNews&&(!error))&&todayNews.map((eachNews)=>{
                        return <SubCards key={eachNews.id} news={eachNews} />
