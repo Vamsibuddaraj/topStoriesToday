@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Avatar, CardActions, CardHeader, IconButton, MobileStepper } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TOPSTORIES } from '../utils/config';
+import { TOPSTORIES } from '../../utils/config';
 import SubCards from './SubCards';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -25,7 +25,7 @@ const MainCard = () => {
             const apiRes = await fetch(TOPSTORIES);
             const {sections}  = await apiRes.json();
             let {cards} = sections[1]
-            console.log("sections",cards)
+            // console.log("sections",cards)
             let reqCard = cards.find((card)=>card.id==="CanonicalName-topstories")
             let {subCards}=reqCard
             setNews(subCards)
@@ -37,7 +37,7 @@ const MainCard = () => {
     }
     function* processData(news,chunkSize=3){
             for(let i = generatorIter;i<news.length;i+=chunkSize){
-                console.log(i,"clicked")
+                // console.log(i,"clicked")
                 setGeneratorIter(generatorIter+chunkSize)
                 setActiveStep(activeStep+1)
                 yield news.slice(i,i+chunkSize)
@@ -67,7 +67,7 @@ const MainCard = () => {
     }
     const prevSet = () =>{
         const data= generatedDataRev.next().value
-        console.log("prev",data)
+        // console.log("prev",data)
         if(data){
             setTodayNews(data);
         }
@@ -78,7 +78,7 @@ const MainCard = () => {
             fetchData();
     },[])
     return (
-        <div style={{width:"300px",height:"304px"
+        <div style={{width:"300px",height:"304px", display:"flex"
         // ,margin:"0 auto"
         }} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
             <Card elevation={5} sx={{width:"300px",height:"304px",

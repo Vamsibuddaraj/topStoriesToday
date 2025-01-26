@@ -7,7 +7,7 @@ const SubCards = ({news}) => {
     const {provider:{name,logoUrl},publishedDateTime,title} = news
     // console.log("name",name,"logourl",logoUrl)
     const handleEntryPoints = (e) =>{
-        console.log(e.clientX,e.clientY)
+        // console.log(e.clientX,e.clientY)
         setCoOrd([e.clientX,e.clientY])
     }
     return (
