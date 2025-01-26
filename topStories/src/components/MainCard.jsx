@@ -81,7 +81,7 @@ const MainCard = () => {
         <div style={{width:"300px",height:"304px"
         // ,margin:"0 auto"
         }} onMouseLeave={()=>setOpenNav(false)} onMouseEnter={()=>setOpenNav(true)}>
-            <Card sx={{width:"300px",height:"304px",
+            <Card elevation={5} sx={{width:"300px",height:"304px",
                 // backgroundColor:"orange",
                 position:"relative"}}>
                 <CardHeader sx={{paddingTop:"3px"}}
@@ -95,7 +95,7 @@ const MainCard = () => {
                         }
                     }}
                     action={
-                        <IconButton  onClick={(e)=>{setAnchorEl(e.currentTarget),setMenuOpen(true)}}>
+                        <IconButton disableTouchRipple onClick={(e)=>{setAnchorEl(e.currentTarget),setMenuOpen(true)}}>
                             <MoreHorizIcon sx={{cursor:"pointer"}} fontSize='small' />
                         </IconButton>
                     }
