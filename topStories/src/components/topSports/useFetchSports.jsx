@@ -15,7 +15,8 @@ const useFetchSports = (url) => {
                 }
                 const result = await response.json()
                 console.log("Response",result)
-                const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
+                const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
+                // const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
                 setData(JSON.parse(section))
             }catch(err){
                 setError(err.message)
