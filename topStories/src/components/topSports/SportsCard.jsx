@@ -16,10 +16,11 @@ const SportsCard = () => {
     const sports = Tabs?.[0].tabContent.league.sportsMatches || null
     const cricket = sports?.slice(0,3)
     const {primaryEntityName=null,primaryEntityImage=null} = Tabs?.[0] || {}
-    console.log("cricket------",Tabs,data)
+    console.log("cricket------",targetedEleRef.current)
 
     useEffect(()=>{
-        targetedEleRef.current = document.querySelector("#root > div > div:nth-child(2) > div > div.MuiCardHeader-root.css-3mzbkm-MuiCardHeader-root > div.MuiCardHeader-avatar.css-1r9wl67-MuiCardHeader-avatar > div")
+        targetedEleRef.current = document.querySelector("#root > div > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
+        console.log("targetted---",targetedEleRef)
     },[])  
     return (
         <div style={{width:"300px",height:"304px",marginLeft:"20px"
@@ -28,7 +29,7 @@ const SportsCard = () => {
             <Card elevation={5} sx={{width:"300px",height:"304px",
                 // backgroundColor:"orange",
                 position:"relative"}}>
-                <CardHeader sx={{paddingTop:"3px"}}
+                <CardHeader sx={{paddingTop:"3px",paddingBottom:"3px"}}
                     avatar={
                         <Avatar sx={{height:"20px",width:"16px"}} src={`https://www.bing.com/th?id=${primaryEntityImage}`}/>
                     }
