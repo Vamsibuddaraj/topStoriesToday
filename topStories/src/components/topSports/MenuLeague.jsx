@@ -1,6 +1,7 @@
 import { Badge, Box, Divider, IconButton, Menu, MenuItem, Typography } from "@mui/material"
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { SPORTSIMGURL } from "../../utils/config";
+import AddIcon from '@mui/icons-material/Add';
 
 
 const MenuLeague = ({data,anchor,isOpen,handleClose}) => {
@@ -40,10 +41,13 @@ const MenuLeague = ({data,anchor,isOpen,handleClose}) => {
             <Box color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
               <IconButton>
                 <Badge sx={{
-                  "& .MuiBadge-root.MuiBadge-badge":{
-                    top:"15px"
+                  "& .MuiBadge-badge":{
+                    top: "17px",
+                    width: "16px",
+                    height: "15px",
+                    left: "4px"
                   }
-                }} badgeContent={"+"} color="primary">
+                }} badgeContent={<AddIcon fontSize="0.8rem"/>} color="primary">
                   <StarOutlineIcon fontSize="1rem" color="primary"/>
                 </Badge>
               </IconButton>

@@ -35,8 +35,8 @@ const SportsCard = () => {
                     }
                     title={
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Typography sx={{ fontWeight: 400, marginRight: 1 }}>{primaryEntityName}</Typography>
-                        <IconButton onClick={()=>{setAnchorEl(targetedEleRef.current),setMenuOpen(true)}}>
+                            <Typography sx={{ fontWeight: 400, marginRight: 0,fontSize:"0.88rem" }}>{primaryEntityName}</Typography>
+                        <IconButton disableFocusRipple sx={{paddingLeft:0}} onMouseEnter={()=>{setAnchorEl(targetedEleRef.current),setMenuOpen(true)}}>
                             <KeyboardArrowDownIcon fontSize='small'/>
                         </IconButton>
                         </Box>
