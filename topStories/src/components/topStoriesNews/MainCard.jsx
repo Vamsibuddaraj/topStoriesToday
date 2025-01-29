@@ -24,7 +24,7 @@ const MainCard = () => {
         try{
             const apiRes = await fetch(TOPSTORIES);
             const {sections}  = await apiRes.json();
-            let {cards} = sections[1]
+            let cards = sections.find((section)=>section.region=="cardData").cards
             // console.log("sections",cards)
             let reqCard = cards.find((card)=>card.id==="CanonicalName-topstories")
             let {subCards}=reqCard

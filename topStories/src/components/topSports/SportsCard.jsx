@@ -19,7 +19,8 @@ const SportsCard = () => {
     console.log("cricket------",targetedEleRef.current)
 
     useEffect(()=>{
-        targetedEleRef.current = document.querySelector("#root > div > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
+        targetedEleRef.current = document.querySelector("#root > div > div > div.MuiBox-root > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
+        // document.querySelector("#root > div > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
         console.log("targetted---",targetedEleRef)
     },[])  
     return (
