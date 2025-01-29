@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material"
+import { Box, Card, Typography } from "@mui/material"
 import { SPORTSIMGURL } from "../../utils/config"
 
 const MatchCard = ({match}) => {
@@ -40,39 +40,15 @@ const MatchCard = ({match}) => {
       return {dateString,timeString}
       }
       const istDateTime = convertToIST(gameStartDateTime);
-      
+      const gameStats = {gameSummaryInfo:gameSummaryInfo,venueInfo:venueInfo,gameState:gameState,teamOneScore:teamOneScore,teamTwoScore:teamTwoScore,istDateTime:istDateTime}
     return (
         <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly",width:"268px", height:"54px",margin:"10px",borderRadius:0,marginTop:"15px", backgroundColor:"#eaeeea",padding:"5px"}}>
-            <div style={{display:"flex",flexDirection:"column",width:"100px",alignItems:"center"}}>
+            <div style={{display:"flex",flexDirection:"column",width:"100px",width:"35px",alignItems:"center"}}>
                 <img style={{paddingBottom:"1px"}} width={"32px"} height={"32px"} src={`${SPORTSIMGURL+teamOneLogo}`}/>
                 <p style={{margin:0,fontSize:"11px"}}>{teamOne}</p>
             </div>
-            <div style={{display:"flex",flexDirection:"column",flexGrow:1,alignItems:"center"}}>
-                <Typography
-                sx={{width:"120px",
-                    height:"20px",
-                    textAlign:"center",
-                    fontWeight:"600",
-                    fontSize: "14px",
-                    lineHeight: "20px"
-                    }}>{istDateTime.dateString}</Typography >
-                <Typography sx={{width:"120px",height:"20px",textAlign:"center",
-                    fontSize: "12px",
-                    lineHeight: "16px"
-                }}>{istDateTime.timeString}</Typography >
-                <Typography sx={{
-                    width: "180px",
-                    textAlign: "center",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    padding: "0px 10px",
-                    boxSizing: "border-box",
-                    fontSize:"10px"
-                }}
-                >{venueInfo}</Typography >
-            </div>
-            <div style={{display:"flex",flexDirection:"column",width:"100px",alignItems:"center"}}>
+            <SportStats gameState={gameStats}/>
+            <div style={{display:"flex",flexDirection:"column",width:"100px",width:"35px",alignItems:"center"}}>
                 <img style={{paddingBottom:"1px"}} width={"32px"} height={"32px"} src={`${SPORTSIMGURL+teamTwoLogo}`}/>
                 <p style={{margin:0,fontSize:"11px"}}>{teamTwo}</p>
             </div>
@@ -81,3 +57,69 @@ const MatchCard = ({match}) => {
 }
 
 export default MatchCard
+
+const SportStats = ({gameState:{gameSummaryInfo,venueInfo,gameState,teamOneScore,teamTwoScore,istDateTime}}) =>{
+    return (
+        <div style={{display:"flex",flexDirection:"column",flexGrow:1,alignItems:"center"}}>
+            { gameState.detailedGameState!=="PreGame"?
+                <Box sx={{display:"flex",flexDirection:"row",width:"200px",height:"40px",justifyContent:"space-between",alignItems:"center"}}>
+                    <Typography sx={{width:"48px",
+                        height:"20px",
+                        textAlign:"center",
+                        fontSize: "8.7px",
+                        lineHeight: "20px"
+                        }}>{teamOneScore}
+                    </Typography >
+                    <Typography>
+                        {gameState.state=="InProgress"?<span style={{   
+                                color: "white",
+                                fontSize: "9px",
+                                height: "15px",
+                                width: "30px",
+                                paddingTop: "3px",
+                                paddingLeft: "8px",
+                                // backgroundColor: "#61de61",
+                                backgroundColor:"rgb(69 141 69)",
+                                display: "block",
+                                fontWeight: 700}}
+                                >LIVE</span>:"vs"}
+                    </Typography>
+                    <Typography sx={{width:"48px",
+                        height:"20px",
+                        textAlign:"center",
+                        fontSize: "8px",
+                        lineHeight: "20px"
+                        }}>{teamTwoScore}
+                    </Typography >
+                </Box>:
+                <> 
+                    <Typography sx={{width:"120px",
+                        height:"20px",
+                        textAlign:"center",
+                        fontWeight:"600",
+                        fontSize: "14px",
+                        lineHeight: "20px"
+                        }}>{istDateTime.dateString}
+                    </Typography >
+                    <Typography sx={{width:"120px",height:"20px",textAlign:"center",
+                    fontSize: "12px",
+                    lineHeight: "16px"
+                    }}>{istDateTime.timeString}</Typography>
+                </>
+                
+            }
+
+            <Typography sx={{
+                width: "180px",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                padding: "0px 10px",
+                boxSizing: "border-box",
+                fontSize:"10px"
+            }}
+            >{!gameSummaryInfo?venueInfo:gameSummaryInfo}</Typography >
+        </div>
+    )
+}

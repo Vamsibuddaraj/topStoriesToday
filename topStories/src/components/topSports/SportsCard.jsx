@@ -1,5 +1,5 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { Avatar, Box, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
 import useFetchSports from './useFetchSports';
 import { TOPSPORTS } from '../../utils/config';
 import { useEffect, useRef, useState } from 'react';
@@ -53,13 +53,13 @@ const SportsCard = () => {
                     }
                 />
                 {Tabs&&<MenuLeague data={Tabs} handleClose={()=>setMenuOpen(false)} isOpen={menuOpen} anchor={anchorEl}/>}
-                <CardContent sx={{marginLeft:"2px",padding:"2px"}}>
+                <CardContent sx={{marginLeft:"2px",padding:"2px",marginTop:"-14px"}}>
                     {cricket&&cricket.map((match)=>{
                         return <MatchCard key={match.gameId} match={match} />
                     })}
                 </CardContent>
-                <CardActions>
-                    
+                <CardActions sx={{paddingTop:0}}>
+                    <Button sx={{marginLeft:"93px",fontSize:"10px"}} >See more ICC</Button>
                 </CardActions>
 
             </Card>
