@@ -1,10 +1,13 @@
-import { AppBar, Box, Container, IconButton, styled, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Container, Divider, IconButton, styled, Toolbar, Typography } from "@mui/material"
 import ListIcon from '@mui/icons-material/List';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MainCard from "../topStoriesNews/MainCard";
 import SportsCard from "../topSports/SportsCard";
+import useFetchSports from "../topSports/useFetchSports";
+import { NEWSURL } from "../../utils/config";
+import ArticalCard from "./ArticlesCard";
 
 
 const Search = styled("div")(({theme})=>({
@@ -43,6 +46,8 @@ const InputBaseStyled = styled(InputBase)(({theme})=>({
   },
 }))
 const HomePage = () => {
+    const {data:data1,loading,error} = useFetchSports(NEWSURL,"news")
+    const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
         <Container>
             <Box sx={{ flexGrow: 1 }}>
@@ -76,10 +81,15 @@ const HomePage = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px"}}>
+            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginY:"30px"}}>
                 <MainCard />
                 <SportsCard />
             </Box>
+            <Divider />
+            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",}}>
+                {data&&data.map((article)=><ArticalCard key={article.id} article={article}/>)}
+            </Box>
+
         </Container>
     )
 }

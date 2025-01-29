@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useFetchSports = (url) => {
+const useFetchSports = (url,news=null) => {
     const [data,setData] = useState(null)
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState(null)
@@ -14,10 +14,14 @@ const useFetchSports = (url) => {
                     throw new Error("failed to fetch data")
                 }
                 const result = await response.json()
-                console.log("Response",result)
-                const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
-                // const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
-                setData(JSON.parse(section))
+                if(!news){
+                    console.log("Response",news)
+                    const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
+                    // const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
+                    setData(JSON.parse(section))
+                }else{
+                    setData(result.sections[0].cards)
+                }
             }catch(err){
                 setError(err.message)
             }finally{
