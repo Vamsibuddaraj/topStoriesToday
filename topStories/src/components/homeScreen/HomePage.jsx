@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Divider, IconButton, styled, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Card, Container, Divider, IconButton, styled, Toolbar, Typography } from "@mui/material"
 import ListIcon from '@mui/icons-material/List';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
@@ -49,8 +49,8 @@ const HomePage = () => {
     const {data:data1,loading,error} = useFetchSports(NEWSURL,"news")
     const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
-        <Container>
-            <Box sx={{ flexGrow: 1 }}>
+        <Container sx={{}}>
+            <Box sx={{ flexGrow: 1 ,backgroundColor:"white",marginTop:"10px"}}>
                 <AppBar color="#c2d9c3" position="static">
                     <Toolbar>
                         <IconButton
@@ -81,14 +81,24 @@ const HomePage = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginY:"30px"}}>
-                <MainCard />
-                <SportsCard />
-            </Box>
+            <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
+                <Typography sx={{fontWeight:"600"}}>
+                    Trending
+                </Typography>
+                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginY:"30px"}}>
+                    <MainCard />
+                    <SportsCard />
+                </Box>
+            </Card>
             <Divider />
-            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",}}>
-                {data&&data.map((article)=><ArticalCard key={article.id} article={article}/>)}
-            </Box>
+            <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
+                <Typography sx={{fontWeight:"600"}}>
+                    News Articles
+                </Typography>
+                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",}}>
+                    {data&&data.map((article)=><ArticalCard key={article.id} article={article}/>)}
+                </Box>
+            </Card>
 
         </Container>
     )

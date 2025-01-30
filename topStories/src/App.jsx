@@ -7,7 +7,7 @@ function App() {
 
   return (
       // <div style={{width:"100%",height:"100vh"}}>
-      <div style={{display:"flex"}}>
+      <div style={{display:"flex",backgroundColor:"rgb(14 102 96 / 78%)"}}>
         {/* <MainCard />
         <SportsCard /> */}
         <HomePage />
