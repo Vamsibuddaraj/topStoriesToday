@@ -9,8 +9,9 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import "./mainCard.css"
 import MenuComp from './MenuComp';
+import CurrencySubCard from '../moneyMarket/CurrencySubCard';
 
-const MainCard = () => {
+const MainCard = ({crypto=null,handleCards=null,handleCardsBack=null,title=null,activeStepCurrency=null}) => {
     const [news,setNews] = useState(null)
     const [todayNews,setTodayNews] = useState()
     const [error,setError] = useState(false)
@@ -58,24 +59,33 @@ const MainCard = () => {
 
     const generatedData = processData(news);
     const generatedDataRev = processDataRev(news)
-
     const nextSet = () => {
-        const data= generatedData.next().value
-        if(data){
-            setTodayNews(data);
+        if(!crypto){
+            const data= generatedData.next().value
+            if(data){
+                setTodayNews(data);
+            }
+        }else{
+            handleCards()
         }
     }
     const prevSet = () =>{
-        const data= generatedDataRev.next().value
-        // console.log("prev",data)
-        if(data){
-            setTodayNews(data);
+        if(!crypto){
+            const data= generatedDataRev.next().value
+            // console.log("prev",data)
+            if(data){
+                setTodayNews(data);
+            }
+        }else{
+            handleCardsBack()
         }
     }
 
     // console.log("open",openNav)
     useEffect(()=>{
+        if(!crypto){
             fetchData();
+        }
     },[])
     return (
         <div style={{width:"300px",height:"304px", display:"flex"
@@ -86,12 +96,14 @@ const MainCard = () => {
                 position:"relative"}}>
                 <CardHeader sx={{paddingTop:"3px"}}
                     avatar={
-                        <Avatar sx={{height:"20px",width:"16px"}} src='https://assets.msn.com/staticsb/statics//latest/icons/NtpTopStories.svg'/>
+                        <Avatar sx={{height:"20px",width:"16px"}} src={!crypto?'https://assets.msn.com/staticsb/statics//latest/icons/NtpTopStories.svg':"https://assets.msn.com/weathermapdata/1/static/finance/1stparty/FinanceTaskbarIcons/Finance_Stock_Increase_Decrease/Finance_stock_up_green_72x72.png"}/>
                     }
-                    title="Top Stories"
+                    title={!crypto?"Top Stories":title}
                     slotProps={{
                         title:{
-                            fontWeight:"600"
+                            fontWeight:"600",
+                            fontFamily:"Montserrat"
+                            
                         }
                     }}
                     action={
@@ -102,9 +114,12 @@ const MainCard = () => {
                 />
                 <MenuComp handleClose={()=>setMenuOpen(false)} isOpen={menuOpen} anchor={anchorEl}/>
                 <CardContent sx={{marginLeft:"2px",padding:"2px"}}>
-                    {(todayNews&&(!error))&&todayNews.map((eachNews)=>{
+                    {!crypto&&
+                    (todayNews&&(!error))&&todayNews.map((eachNews)=>{
                        return <SubCards key={eachNews.id} news={eachNews} />
                     })}
+                    {crypto&&crypto.slice(0,5).map((money)=><CurrencySubCard key={money.id} money={money}/>)}
+
                 </CardContent>
                 <CardActions>
                     <MobileStepper sx={{
@@ -123,7 +138,7 @@ const MainCard = () => {
                             backgroundColor: "black", 
                         },
 
-                        }} variant='dots' activeStep={activeStep} steps={4}/>
+                        }} variant='dots' activeStep={(crypto===null)?activeStep:activeStepCurrency} steps={4}/>
                 </CardActions>
                 <div onClick={prevSet} className={`leftarr arrow ${openNav?"visible":"hidden"}`} >
                         <IconButton disableTouchRipple disableFocusRipple disableRipple sx={{paddingLeft:"0"}}>

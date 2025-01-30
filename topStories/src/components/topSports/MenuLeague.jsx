@@ -6,7 +6,6 @@ import AddIcon from '@mui/icons-material/Add';
 
 const MenuLeague = ({data,anchor,isOpen,handleClose}) => {
     const {primaryEntityName:yourLeague,primaryEntityImage:yourLeagueImg} = data?.[0]
-    console.clear()
     console.log("myleague",data)
     return (
         <Menu

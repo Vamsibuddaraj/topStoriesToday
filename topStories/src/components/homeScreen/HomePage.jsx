@@ -5,9 +5,10 @@ import InputBase from '@mui/material/InputBase';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MainCard from "../topStoriesNews/MainCard";
 import SportsCard from "../topSports/SportsCard";
-import useFetchSports from "../topSports/useFetchSports";
+import useFetch from "../topSports/useFetch";
 import { NEWSURL } from "../../utils/config";
 import ArticalCard from "./ArticlesCard";
+import CurrencyCard from "../moneyMarket/CurrencyCard";
 
 
 const Search = styled("div")(({theme})=>({
@@ -46,7 +47,7 @@ const InputBaseStyled = styled(InputBase)(({theme})=>({
   },
 }))
 const HomePage = () => {
-    const {data:data1,loading,error} = useFetchSports(NEWSURL,"news")
+    const {data:data1,loading,error} = useFetch(NEWSURL,"news")
     const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
         <Container sx={{}}>
@@ -85,9 +86,10 @@ const HomePage = () => {
                 <Typography sx={{fontWeight:"600"}}>
                     Trending
                 </Typography>
-                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginY:"30px"}}>
+                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
                     <MainCard />
                     <SportsCard />
+                    <CurrencyCard />
                 </Box>
             </Card>
             <Divider />
@@ -99,6 +101,7 @@ const HomePage = () => {
                     {data&&data.map((article)=><ArticalCard key={article.id} article={article}/>)}
                 </Box>
             </Card>
+
 
         </Container>
     )

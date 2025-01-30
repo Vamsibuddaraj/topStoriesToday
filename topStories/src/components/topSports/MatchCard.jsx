@@ -42,7 +42,7 @@ const MatchCard = ({match}) => {
       const istDateTime = convertToIST(gameStartDateTime);
       const gameStats = {gameSummaryInfo:gameSummaryInfo,venueInfo:venueInfo,gameState:gameState,teamOneScore:teamOneScore,teamTwoScore:teamTwoScore,istDateTime:istDateTime}
     return (
-        <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly",width:"268px", height:"54px",margin:"10px",borderRadius:0,marginTop:"15px", backgroundColor:"#eaeeea",padding:"5px"}}>
+        <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly",width:"268px", height:"54px",margin:"10px",borderRadius:0,marginTop:"15px", backgroundColor:"#f3f3f3",padding:"5px"}}>
             <div style={{display:"flex",flexDirection:"column",width:"100px",width:"35px",alignItems:"center"}}>
                 <img style={{paddingBottom:"1px"}} width={"32px"} height={"32px"} src={`${SPORTSIMGURL+teamOneLogo}`}/>
                 <p style={{margin:0,fontSize:"11px"}}>{teamOne}</p>
