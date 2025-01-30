@@ -1,6 +1,6 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
-import useFetchSports from './useFetchSports';
+import useFetch from './useFetch';
 import { TOPSPORTS } from '../../utils/config';
 import { useEffect, useRef, useState } from 'react';
 import MatchCard from './MatchCard';
@@ -9,7 +9,7 @@ import MenuLeague from './MenuLeague';
 
 const SportsCard = () => {
     const targetedEleRef  = useRef(null)
-    const {data,loading,error} = useFetchSports(TOPSPORTS)
+    const {data,loading,error} = useFetch(TOPSPORTS,"sports")
     const [anchorEl,setAnchorEl] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
     const Tabs =data?.Model?.Tabs
@@ -44,7 +44,8 @@ const SportsCard = () => {
                     }
                     slotProps={{
                         title:{
-                            fontWeight:"600"
+                            fontWeight:"600",
+                            fontFamily:"Montserrat"
                         }
                     }}
                     action={

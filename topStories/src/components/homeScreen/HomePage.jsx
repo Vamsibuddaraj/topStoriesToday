@@ -5,6 +5,7 @@ import InputBase from '@mui/material/InputBase';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MainCard from "../topStoriesNews/MainCard";
 import SportsCard from "../topSports/SportsCard";
+import CurrencyCard from "../moneyMarket/CurrencyCard";
 
 
 const Search = styled("div")(({theme})=>({
@@ -76,9 +77,10 @@ const HomePage = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px"}}>
+            <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
                 <MainCard />
                 <SportsCard />
+                <CurrencyCard />
             </Box>
         </Container>
     )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useFetchSports = (url) => {
+const useFetch = (url,type=null) => {
     const [data,setData] = useState(null)
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState(null)
@@ -15,9 +15,14 @@ const useFetchSports = (url) => {
                 }
                 const result = await response.json()
                 console.log("Response",result)
-                const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
-                // const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
-                setData(JSON.parse(section))
+                if(type=="sports"){
+                    const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
+                    // const section = result?.sections[1]?.cards.find((item)=>item.type=="SportsMatch").data
+                    setData(JSON.parse(section))
+                }else if(type=="currency"){
+                    const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="MoneyInfo").data
+                    setData(JSON.parse(section))
+                }
             }catch(err){
                 setError(err.message)
             }finally{
@@ -30,4 +35,4 @@ const useFetchSports = (url) => {
     return {data,loading,error}
 }
 
-export default useFetchSports
+export default useFetch
