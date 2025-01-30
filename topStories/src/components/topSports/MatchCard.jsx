@@ -71,18 +71,19 @@ const SportStats = ({gameState:{gameSummaryInfo,venueInfo,gameState,teamOneScore
                         }}>{teamOneScore}
                     </Typography >
                     <Typography>
-                        {gameState.state=="InProgress"?<span style={{   
+                        {(gameState.state=="InProgress")?<span style={{   
                                 color: "white",
                                 fontSize: "9px",
                                 height: "15px",
-                                width: "30px",
+                                // width: "35px",
                                 paddingTop: "3px",
-                                paddingLeft: "8px",
+                                paddingLeft: "3px",
+                                paddingRight:"3px",
                                 // backgroundColor: "#61de61",
                                 backgroundColor:"rgb(69 141 69)",
                                 display: "block",
                                 fontWeight: 700}}
-                                >LIVE</span>:"vs"}
+                                >{gameState.detailedGameState=="Stumps"?"Stumps":"LIVE"}</span>:"vs"}
                     </Typography>
                     <Typography sx={{width:"48px",
                         height:"20px",
