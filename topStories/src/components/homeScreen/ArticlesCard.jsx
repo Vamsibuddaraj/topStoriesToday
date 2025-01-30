@@ -25,7 +25,7 @@ const ArticalCard = ({article}) => {
                 />
                 <CardContent sx={{pt:"4px"}}>
                     <Typography sx={{
-                                fontFamily:"sans-serif",
+                                fontFamily:"Montserrat",
                                 fontSize:"14px",
                                 fontWeight:600,
                                 display: "-webkit-box",

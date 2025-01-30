@@ -32,14 +32,15 @@ const SubCards = ({news}) => {
                     <CustToolTip title={title} coOrd={coOrd}>
                         <Typography sx={{
                             fontSize:"12px",
-                            fontWeight:550,
+                            fontWeight:650,
                             width:"260px",
                             height:"40px",
                             display: '-webkit-box',            // Use flexbox-like box for multi-line layout
                             overflow: 'hidden',                // Hide overflowing content
                             WebkitBoxOrient: 'vertical',       // Set the box orientation to vertical
                             WebkitLineClamp: 2,                // Limit the text to 2 lines
-                            textOverflow: 'ellipsis',  
+                            textOverflow: 'ellipsis',
+                            fontFamily:"Montserrat"  
                             }} component={"p"}>{title}</Typography>
                         </CustToolTip>
                 </CardContent>

@@ -82,8 +82,8 @@ const HomePage = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
-                <Typography sx={{fontWeight:"600"}}>
+            <Card elevation={4} sx={{marginTop:"20px",paddingBottom:"30px"}}>
+                <Typography sx={{fontWeight:"600",fontFamily:"Montserrat",m:"5px"}}>
                     Trending
                 </Typography>
                 <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
@@ -94,7 +94,7 @@ const HomePage = () => {
             </Card>
             <Divider />
             <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
-                <Typography sx={{fontWeight:"600"}}>
+                <Typography sx={{fontWeight:"600",fontFamily:"Montserrat"}}>
                     News Articles
                 </Typography>
                 <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",}}>
