@@ -71,7 +71,7 @@ const MenuLeague = ({anchor,isOpen,handleClose,updateLeague}) => {
                 </Typography>
             </MenuItem>
             <MenuItem>
-            <Box color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
+            <Box onClick={()=>selectedLeague(data[0])} color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
               <img style={{paddingBottom:"1px"}} width={"25px"} height={"25px"} src={SPORTSIMGURL+yourLeagueImg}/>
               <Typography fontSize={"0.85rem"}>
                 {yourLeague}

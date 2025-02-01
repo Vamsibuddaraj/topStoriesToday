@@ -34,7 +34,7 @@ const SportsCard = () => {
         console.log("targetted---",targetedEleRef)
     },[])  
     return (
-        <div style={{width:"300px",height:"304px",marginLeft:"20px"}} >
+        <div style={{width:"300px",height:"304px",}} >
             <Card elevation={5} sx={{width:"300px",height:"304px",position:"relative"}}>
                 <CardHeader sx={{paddingTop:"3px",paddingBottom:"3px"}}
                     avatar={
@@ -69,7 +69,7 @@ const SportsCard = () => {
                     })}
                 </CardContent>
                 <CardActions sx={{paddingTop:0}}>
-                    <Button sx={{marginLeft:"93px",fontSize:"10px"}} >See more ICC</Button>
+                    <Button sx={{marginLeft:"93px",fontSize:"10px"}} >See more..</Button>
                 </CardActions>
 
             </Card>
