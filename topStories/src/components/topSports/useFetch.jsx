@@ -15,13 +15,19 @@ const useFetch = (url,type=null) => {
                 }
                 const result = await response.json()
                 if(type=="news"){
-                    console.log("Response",type)
                     const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards
                     setData(section)
                 }
                 else if(type=="sports"){
-                    const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
-                    setData(JSON.parse(section))
+                    if(url.includes("satoriid")){
+                        const {Model:{Tabs:[{tabContent:{league:{sportsMatches}}}]}} = JSON.parse(result?.value[0].blendedResponse)
+                        console.log("Specificdata--",sportsMatches)
+                        setData(sportsMatches)
+                    }else{
+                        const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="SportsMatch").data
+                        console.log("parsed data---",result)
+                        setData(JSON.parse(section))
+                    }
                 }else if(type=="currency"){
                     const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="MoneyInfo").data
                     setData(JSON.parse(section))

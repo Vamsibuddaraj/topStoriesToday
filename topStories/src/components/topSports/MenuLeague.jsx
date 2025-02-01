@@ -1,12 +1,21 @@
 import { Badge, Box, Divider, IconButton, Menu, MenuItem, Typography } from "@mui/material"
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { SPORTSIMGURL } from "../../utils/config";
+import { GAMES, TOPSPORTS } from '../../utils/config';
 import AddIcon from '@mui/icons-material/Add';
+import useFetch from "./useFetch";
 
 
-const MenuLeague = ({data,anchor,isOpen,handleClose}) => {
-    const {primaryEntityName:yourLeague,primaryEntityImage:yourLeagueImg} = data?.[0]
-    console.log("myleague",data)
+const MenuLeague = ({anchor,isOpen,handleClose,updateLeague}) => {
+    const {data:dataresp,loading,error} = useFetch(TOPSPORTS,'sports')
+    const data =dataresp?.Model?.Tabs.filter((league)=>!["LPGA","PGA","DP World Tour"].some((item)=>league.primaryEntityName.includes(item)))
+    const {primaryEntityName:yourLeague,primaryEntityImage:yourLeagueImg} = data?.[0] || {}
+    console.log("into menu league")
+    const selectedLeague = (league) =>{
+      console.log("selevcted -----",league)
+      handleClose()
+      updateLeague(league,"league")
+    }
     return (
         <Menu
             anchorEl={anchor}
@@ -74,15 +83,15 @@ const MenuLeague = ({data,anchor,isOpen,handleClose}) => {
                   More leagues
                 </Typography>
             </MenuItem>
-            {data&&data.slice(1).map((league)=><LeagueBox key={league.yId} data={league} />)}
+            {data&&data.slice(1).map((league)=><LeagueBox key={league.yId} data={league} selectedLeague={()=>selectedLeague(league)}/>)}
         </Menu>
     )
 }
 
-const LeagueBox = ({data}) => {
+const LeagueBox = ({data,selectedLeague}) => {
   const {primaryEntityName:yourLeague,primaryEntityImage:yourLeagueImg} = data
   return (
-    <MenuItem>
+    <MenuItem onClick={selectedLeague} >
       <Box color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
           <img style={{paddingBottom:"1px"}} width={"25px"} height={"25px"} src={SPORTSIMGURL+yourLeagueImg}/>
           <Typography fontSize={"0.85rem"}>

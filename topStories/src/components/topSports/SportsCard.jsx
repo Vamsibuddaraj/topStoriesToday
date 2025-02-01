@@ -1,7 +1,7 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
 import useFetch from './useFetch';
-import { TOPSPORTS } from '../../utils/config';
+import { GAMES, TOPSPORTS } from '../../utils/config';
 import { useEffect, useRef, useState } from 'react';
 import MatchCard from './MatchCard';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -9,26 +9,33 @@ import MenuLeague from './MenuLeague';
 
 const SportsCard = () => {
     const targetedEleRef  = useRef(null)
-    const {data,loading,error} = useFetch(TOPSPORTS,"sports")
+    const [type,setType] = useState("sports")
+    const [url,setUrl] = useState(TOPSPORTS)
+    const [league,setLeague] = useState(null)
+    const {data,loading,error} = useFetch(url,type)
     const [anchorEl,setAnchorEl] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
     const Tabs =data?.Model?.Tabs
     const sports = Tabs?.[0].tabContent.league.sportsMatches || null
-    const cricket = sports?.slice(0,3)
-    const {primaryEntityName=null,primaryEntityImage=null} = Tabs?.[0] || {}
-    console.log("cricket------",targetedEleRef.current)
+    console.log("Sports-------",league)
+    console.log("modell---",data)
+    const cricket = sports?.slice(0,3) || data?.slice(0,3)
+    const {primaryEntityName=null,primaryEntityImage=null} = (sports)?Tabs?.[0] : league || {}
+    const updateLeague = async (league,type) => {
+        setLeague(league)
+        const {primaryEntityId} = league;
+        setUrl(`${GAMES}${primaryEntityId}`)
+    }
 
     useEffect(()=>{
-        targetedEleRef.current = document.querySelector("#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
+        targetedEleRef.current = 
+        // document.querySelector("#root > div > div > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.MuiCard-root.css-1eo0s5m-MuiPaper-root-MuiCard-root > div > div:nth-child(2) > div > div.MuiCardHeader-root.css-1mw9zgz-MuiCardHeader-root")
+        document.querySelector("#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div > div.MuiCardHeader-root > div.MuiCardHeader-avatar > div")
         console.log("targetted---",targetedEleRef)
     },[])  
     return (
-        <div style={{width:"300px",height:"304px",marginLeft:"20px"
-        // ,margin:"0 auto"
-        }} >
-            <Card elevation={5} sx={{width:"300px",height:"304px",
-                // backgroundColor:"orange",
-                position:"relative"}}>
+        <div style={{width:"300px",height:"304px",marginLeft:"20px"}} >
+            <Card elevation={5} sx={{width:"300px",height:"304px",position:"relative"}}>
                 <CardHeader sx={{paddingTop:"3px",paddingBottom:"3px"}}
                     avatar={
                         <Avatar sx={{height:"20px",width:"16px"}} src={`https://www.bing.com/th?id=${primaryEntityImage}`}/>
@@ -53,7 +60,9 @@ const SportsCard = () => {
                         </IconButton>
                     }
                 />
-                {Tabs&&<MenuLeague data={Tabs} handleClose={()=>setMenuOpen(false)} isOpen={menuOpen} anchor={anchorEl}/>}
+                {/* {Tabs&&<MenuLeague updateLeague={updateLeague}  */}
+                <MenuLeague updateLeague={updateLeague}
+                handleClose={()=>setMenuOpen(false)} isOpen={menuOpen} anchor={anchorEl}/>
                 <CardContent sx={{marginLeft:"2px",padding:"2px",marginTop:"-14px"}}>
                     {cricket&&cricket.map((match)=>{
                         return <MatchCard key={match.gameId} match={match} />
