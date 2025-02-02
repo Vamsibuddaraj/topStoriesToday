@@ -1,4 +1,4 @@
-import { Badge, Box, Divider, IconButton, Menu, MenuItem, Typography } from "@mui/material"
+import { Badge, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material"
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { SPORTSIMGURL } from "../../utils/config";
 import { GAMES, TOPSPORTS } from '../../utils/config';
@@ -92,12 +92,14 @@ const LeagueBox = ({data,selectedLeague}) => {
   const {primaryEntityName:yourLeague,primaryEntityImage:yourLeagueImg} = data
   return (
     <MenuItem onClick={selectedLeague} >
-      <Box color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
-          <img style={{paddingBottom:"1px"}} width={"25px"} height={"25px"} src={SPORTSIMGURL+yourLeagueImg}/>
-          <Typography fontSize={"0.85rem"}>
-            {yourLeague}
-          </Typography>
-        </Box>
+      <Tooltip arrow placement="right" title="click for more details">
+        <Box color={"primary"} display={"flex"} alignItems={"center"} gap={2}>
+            <img style={{paddingBottom:"1px"}} width={"25px"} height={"25px"} src={SPORTSIMGURL+yourLeagueImg}/>
+            <Typography fontSize={"0.85rem"}>
+              {yourLeague}
+            </Typography>
+          </Box>
+      </Tooltip>
     </MenuItem>
   )
 }
