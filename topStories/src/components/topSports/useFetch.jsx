@@ -31,6 +31,8 @@ const useFetch = (url,type=null) => {
                 }else if(type=="currency"){
                     const section =  result?.sections.find((sec)=>sec.region==="cardData")?.cards.find((item)=>item.type=="MoneyInfo").data
                     setData(JSON.parse(section))
+                }else if(type == "charts"){
+                    setData(result)
                 }
                 else{
                     setData(result.sections[0].cards)

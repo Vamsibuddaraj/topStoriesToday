@@ -1,10 +1,14 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Menu, MenuList, Typography } from "@mui/material"
+import PlotChart from "./PlotChart"
+import { useState } from "react"
 
 const CurrencySubCard = ({money}) => {
+    const [menuOpen,setMenuOpen] = useState(false)
     console.log("money--------",money)
     const {displayName,changePcnt,price} = money
     return (
-        <Box sx={{my:"10px",mr:"3px",px:"20px",backgroundColor:"#f3f3f3",width:"247px",height:"35px",display:"flex",flexDirection:"Row",justifyContent:"space-between"}}>
+        <>
+        <Box onMouseEnter={()=>setMenuOpen(true)} sx={{my:"10px",mr:"3px",px:"20px",backgroundColor:"#f3f3f3",width:"247px",height:"35px",display:"flex",flexDirection:"Row",justifyContent:"space-between"}}>
             <Typography sx={{width:"180px",height:"30px",pt:"2px"}} component={"div"}>
                 <Typography sx={{fontSize:"0.8rem"}}>
                     {displayName}
@@ -22,6 +26,24 @@ const CurrencySubCard = ({money}) => {
                 </Typography>
             </Typography>
         </Box>
+        <Menu
+        open={menuOpen}
+        onClose={()=>setMenuOpen(false)}
+        sx={{marginLeft:"100px",marginTop:"50px"}}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        >
+        <MenuList sx={{width:"700px",height:"400px"}}>
+                <PlotChart displayName={displayName}/>
+            </MenuList>
+        </Menu>
+        </>
     )
 }
 
