@@ -48,38 +48,12 @@ const PlotChart = ({displayName:currency}) =>{
                 //     top: 20,
                 //     bottom: 10,  // Add padding around the title
                 // }
-            },
+            }, 
             legend: {
                 display: false // Hides legend
             }
         }
-        // scales: {
-        //     x: {
-        //         ticks: {
-        //             display: false // Hides X-axis labels
-        //         },
-        //         grid: {
-        //             display: false // Hides X-axis grid lines if needed
-        //         }
-        //     },
-        //     y: {
-        //         ticks: {
-        //             display: false // Hides Y-axis labels
-        //         },
-        //         grid: {
-        //             display: false // Hides Y-axis grid lines if needed
-        //         }
-        //     }
-        // },
-        // plugins: {
-        //     legend: {
-        //         display: false // Hides legend
-        //     }
-        // },
-        // responsive: false,  // Disable responsiveness to manually control size
-        // maintainAspectRatio: false, // Allow custom width & height
-        // width: 500,   // Not directly used, but needed if setting manually
-        // height: 300,
+
     }
     return chartData?(
             <Line data={RealData} options={options}  />
