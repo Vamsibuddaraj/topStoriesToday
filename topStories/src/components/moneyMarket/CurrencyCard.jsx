@@ -3,7 +3,7 @@ import { MONEYMARKET } from "../../utils/config"
 import useFetch from "../topSports/useFetch"
 import MainCard from "../topStoriesNews/MainCard";
 
-const CurrencyCard = () => {
+const CurrencyCard = ({setMenuOpenTwo=null,setDisplayNameMatch=null}) => {
     const [stateCard,setStateCard] = useState(0)
     const {data,loading,error} = useFetch(MONEYMARKET,"currency")
     const tabs = data?.tabListDetails;
@@ -35,7 +35,7 @@ const CurrencyCard = () => {
 
     return (
         <>
-            {tabs&&(<MainCard handleCardsBack={handleCardsBack} handleCards={handleCardsForw} title={`${itr[stateCard]}`} crypto={forTitle[itr[stateCard]].quoteItems} activeStepCurrency={stateCard}/>)}
+            {tabs&&(<MainCard handleCardsBack={handleCardsBack} handleCards={handleCardsForw} title={`${itr[stateCard]}`} crypto={forTitle[itr[stateCard]].quoteItems} activeStepCurrency={stateCard} setMenuOpenTwo={setMenuOpenTwo} setDisplayNameMatch={setDisplayNameMatch}/>)}
         </>
     )
 }

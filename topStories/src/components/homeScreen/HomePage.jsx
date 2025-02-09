@@ -9,6 +9,9 @@ import useFetch from "../topSports/useFetch";
 import { NEWSURL } from "../../utils/config";
 import ArticalCard from "./ArticlesCard";
 import CurrencyCard from "../moneyMarket/CurrencyCard";
+import { CustomModalLike } from "../moneyMarket/CurrencySubCard";
+import PlotChart from "../moneyMarket/PlotChart";
+import { useState } from "react";
 
 
 const Search = styled("div")(({theme})=>({
@@ -47,6 +50,8 @@ const InputBaseStyled = styled(InputBase)(({theme})=>({
   },
 }))
 const HomePage = () => {
+        const [displayNameMatch,setDisplayNameMatch] = useState("")
+        const [menuOpenTwo,setMenuOpenTwo] = useState(false)
     const {data:data1,loading,error} = useFetch(NEWSURL,"news")
     const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
@@ -89,7 +94,12 @@ const HomePage = () => {
                 <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
                     <MainCard />
                     <SportsCard />
-                    <CurrencyCard />
+                    <CurrencyCard setMenuOpenTwo={()=>setMenuOpenTwo(true)} setDisplayNameMatch={(displayName)=>setDisplayNameMatch(displayName)}/>
+                    {menuOpenTwo&&     
+                        <CustomModalLike updateMenu={()=>setMenuOpenTwo(false)}>
+                            <PlotChart displayName={displayNameMatch}/>
+                        </CustomModalLike>
+                    }
                 </Box>
             </Card>
             <Divider />
