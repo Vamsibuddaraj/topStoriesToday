@@ -12,7 +12,7 @@ import MenuComp from './MenuComp';
 import CurrencySubCard, { CustomModalLike } from '../moneyMarket/CurrencySubCard';
 import PlotChart from '../moneyMarket/PlotChart';
 
-const MainCard = ({crypto=null,handleCards=null,handleCardsBack=null,title=null,activeStepCurrency=null}) => {
+const MainCard = ({crypto=null,handleCards=null,handleCardsBack=null,title=null,activeStepCurrency=null,setMenuOpenTwo=null,setDisplayNameMatch=null}) => {
     const [news,setNews] = useState(null)
     const [todayNews,setTodayNews] = useState()
     const [error,setError] = useState(false)
@@ -22,8 +22,8 @@ const MainCard = ({crypto=null,handleCards=null,handleCardsBack=null,title=null,
     const [activeStep,setActiveStep] = useState(0)
     const [anchorEl,setAnchorEl] = useState(null)
     const [menuOpen,setMenuOpen] = useState(false)
-    const [displayNameMatch,setDisplayNameMatch] = useState("")
-    const [menuOpenTwo,setMenuOpenTwo] = useState(false)
+    // const [displayNameMatch,setDisplayNameMatch] = useState("")
+    // const [menuOpenTwo,setMenuOpenTwo] = useState(false)
     const fetchData = async () => {
         try{
             const apiRes = await fetch(TOPSTORIES);
@@ -121,12 +121,21 @@ const MainCard = ({crypto=null,handleCards=null,handleCardsBack=null,title=null,
                     (todayNews&&(!error))&&todayNews.map((eachNews)=>{
                        return <SubCards key={eachNews.id} news={eachNews} />
                     })}
-                    {crypto&&crypto.slice(0,5).map((money)=><CurrencySubCard key={money.id} money={money} setMenuOpen={()=>setMenuOpenTwo(true)} setDisplayName={(displayName)=>setDisplayNameMatch(displayName)}/>)}
-                    {menuOpenTwo&&     
+                    {crypto&&crypto.slice(0,5).map((money)=><CurrencySubCard key={money.id} money={money} 
+                    setMenuOpen={()=>{
+                        if(setMenuOpenTwo){
+                            setMenuOpenTwo(true)
+                        }
+                    }} setDisplayName={(displayName)=>{
+                        if(setDisplayNameMatch){
+                            setDisplayNameMatch(displayName)
+                        }
+                    }}/>)}
+                    {/* {menuOpenTwo&&     
                         <CustomModalLike updateMenu={()=>setMenuOpenTwo(false)}>
                             <PlotChart displayName={displayNameMatch}/>
                         </CustomModalLike>
-                    }
+                    } */}
                 </CardContent>
                 <CardActions>
                     <MobileStepper sx={{

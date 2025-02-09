@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuList, Tooltip, Typography } from "@mui/material"
+import { Box, Button, Menu, MenuList, Paper, Tooltip, Typography } from "@mui/material"
 import PlotChart from "./PlotChart"
 import { useState } from "react"
 import zIndex from "@mui/material/styles/zIndex"
@@ -11,9 +11,11 @@ const CurrencySubCard = ({money,setMenuOpen,setDisplayName}) => {
     const {displayName,changePcnt,price} = money
     return (
         <>
-        <div onClick={()=>(
-            setMenuOpen(),
-            setDisplayName(displayName))}>
+        <div onClick={() => {
+                setMenuOpen(true);
+                setDisplayName(displayName);
+            }}
+            >
             <Tooltip placement="right" arrow title="click to visualize">
                 <Box  sx={{cursor:"pointer",my:"10px",mr:"3px",px:"20px",backgroundColor:"#f3f3f3",width:"247px",height:"35px",display:"flex",flexDirection:"Row",justifyContent:"space-between"}}>
                     <Typography sx={{width:"180px",height:"30px",pt:"2px"}} component={"div"}>
@@ -66,12 +68,12 @@ export const CustomModalLike = ({children,updateMenu}) => {
         width: "750px",
         height: "350px",
         top: "10px",
-        position: "fixed",
+        position: "absolute",
         backgroundColor: "white",
         zIndex: 10,
         left: "95px",
         top:130,
-        border:"1px solid black"
+        // border:"1px solid black"
     }
     const cancelStyle = {
         backgroundColor:"white",
@@ -80,10 +82,10 @@ export const CustomModalLike = ({children,updateMenu}) => {
         cursor:"pointer"
     }
     return (
-        <div style={styles}>
-            <Button onClick={updateMenu} sx={cancelStyle}>Cancel</Button>
+        <Paper elevation={6} sx={styles}>
+            <Button onClick={updateMenu} sx={cancelStyle}>Close</Button>
             {children}
-        </div>
+        </Paper>
     )
 }
 
