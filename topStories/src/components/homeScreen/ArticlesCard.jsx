@@ -9,7 +9,7 @@ const ArticalCard = ({article}) => {
     // console.clear()
     console.log("Article---",article)
     return (
-        <Card onMouseEnter={()=>setVisible(true)} onMouseLeave={()=>setVisible(false)} sx={{width:"270px",height:"300px",margin:"6px"}}>
+        <Card onMouseEnter={()=>setVisible(true)} onMouseLeave={()=>setVisible(false)} sx={{width:{sm:"350px",xs:"400px",md:"350px"},height:"300px",margin:"6px"}}>
             <Box position={"relative"}>
                 <CardMedia 
                     component="img"

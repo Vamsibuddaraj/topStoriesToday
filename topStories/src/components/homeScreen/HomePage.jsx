@@ -107,7 +107,7 @@ const HomePage = () => {
                 <Typography sx={{fontWeight:"600",fontFamily:"Montserrat"}}>
                     News Articles
                 </Typography>
-                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",}}>
+                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"20px",justifyContent:"space-evenly"}}>
                     {data&&data.map((article)=><ArticalCard key={article.id} article={article}/>)}
                 </Box>
             </Card>
