@@ -1,5 +1,7 @@
 import { Box, Card, Typography } from "@mui/material"
 import { SPORTSIMGURL } from "../../utils/config"
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useEffect, useRef } from "react"
 
 const MatchCard = ({match}) => {
@@ -64,11 +66,6 @@ const MatchCard = ({match}) => {
         const toHex = (c) => c.toString(16).padStart(2, '0');
         return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     };
-    
-    // Example usage:
-    console.log(lightenHexColor("#3498db", 20)); // Returns a lighter blue
-    console.log(lightenHexColor("#ff5733", 30)); // Returns a lighter orange
-    
 
       useEffect(()=>{
         if(!gameCenterUrl.includes("cricket")){
@@ -170,18 +167,46 @@ const MatchCard = ({match}) => {
                     </div>
             </div>
             <div style={{display:"flex",flexDirection:"column"}}>
-                <Typography sx={{width:"120px",
+                <Typography sx={{
+                            width:"120px",
+                            // marginLeft:"14px",
                             height:"20px",
                             textAlign:"center",
                             fontWeight:"600",
-                            fontSize: "14px",
+                            fontSize: teamOneScore?"9px":"14px",
                             lineHeight: "20px"
                             }}>{istDateTime.dateString}
-                        </Typography >
-                        <Typography sx={{width:"120px",height:"20px",textAlign:"center",
-                        fontSize: "12px",
-                        lineHeight: "16px"
-                        }}>{istDateTime.timeString}</Typography>
+                </Typography >
+                {teamOneScore?
+                <Box sx={{
+                    display:"flex",
+                    flexDirection:"row",
+                    alignItems:"center",
+                    justifyContent:"center",
+                    marginLeft:teamOneScore?"6px":0,
+                }}>
+
+                    {teamOneScore>teamTwoScore&&<ArrowLeftIcon sx={{marginTop:"-5px"}}/>}
+                    <Typography sx={{
+                        // width:"120px",
+                        height:"20px",textAlign:"center",
+                        justifyContent:"center",
+                        fontSize: teamOneScore?"16px":"12px",
+                        lineHeight: "16px",
+                        fontWeight:600,
+                        marginLeft:teamOneScore<teamTwoScore&&"13px",
+                        marginRight:teamTwoScore<teamOneScore&&"27px"
+                    }}>{teamOneScore?teamOneScore+"-"+teamTwoScore:istDateTime.timeString}
+                    </Typography>
+                    {teamTwoScore>teamOneScore&&<ArrowRightIcon sx={{marginTop:"-5px"}}/>}
+                </Box>:
+                <Typography sx={{width:"120px",height:"20px",textAlign:"center",
+                    fontSize: "12px",
+                    lineHeight: "16px"
+                    }}>{istDateTime.timeString}
+                </Typography>
+
+                }
             </div>
             <div style={{display:"flex",flexDirection:"row",width:"100px",width:"35px",alignItems:"center",position:"relative",right:"22px"}}>
                     <div style={{display:"flex",flexDirection:"column",width:"100px",width:"35px",alignItems:"center",position:"absolute",right:"14px"}}>
