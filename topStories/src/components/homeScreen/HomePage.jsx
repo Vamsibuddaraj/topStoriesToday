@@ -12,6 +12,8 @@ import CurrencyCard from "../moneyMarket/CurrencyCard";
 import { CustomModalLike } from "../moneyMarket/CurrencySubCard";
 import PlotChart from "../moneyMarket/PlotChart";
 import { useState } from "react";
+import TopicNavigation from "./TopicNavigation";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 const Search = styled("div")(({theme})=>({
@@ -34,7 +36,7 @@ const SearchIconWrapper = styled("div")(({theme})=>({
 
 const InputBaseStyled = styled(InputBase)(({theme})=>({
     color: 'inherit',
-  width: '100%',
+    width: '100%',
 
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -42,9 +44,9 @@ const InputBaseStyled = styled(InputBase)(({theme})=>({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '50%',
       '&:focus': {
-        width: '20ch',
+        width: '70%',
       },
     },
   },
@@ -56,7 +58,12 @@ const HomePage = () => {
     const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
         <Container sx={{}}>
-            <Box sx={{ flexGrow: 1 ,backgroundColor:"white",marginTop:"10px"}}>
+            <Box sx={{ flexGrow: 1 ,backgroundColor:"white",marginTop:"10px",borderRadius:"35px",
+            "& .MuiPaper-root ":{
+                borderRadius:"40px"
+            }
+
+            }}>
                 <AppBar color="#c2d9c3" position="static">
                     <Toolbar>
                         <IconButton
@@ -66,7 +73,7 @@ const HomePage = () => {
                             aria-label="open drawer"
                             sx={{ mr: 2 }}
                         >
-                            <ListIcon />
+                            <MenuIcon />
                         </IconButton>
 
                         <Search>
@@ -87,10 +94,12 @@ const HomePage = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Card elevation={4} sx={{marginTop:"20px",paddingBottom:"30px"}}>
-                <Typography sx={{fontWeight:"600",fontFamily:"Montserrat",m:"5px"}}>
+            <Card elevation={4} sx={{marginTop:"20px",paddingBottom:"30px",borderRadius:"25px"}}>
+                {/* <Typography sx={{fontWeight:"600",fontFamily:"Montserrat",m:"5px"}}>
                     Trending
-                </Typography>
+                </Typography> */}
+                <TopicNavigation />
+                <Divider/>
                 <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
                     <MainCard />
                     <SportsCard />
@@ -102,7 +111,7 @@ const HomePage = () => {
                     }
                 </Box>
             </Card>
-            <Divider />
+            {/* <Divider /> */}
             <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
                 <Typography sx={{fontWeight:"600",fontFamily:"Montserrat"}}>
                     News Articles
