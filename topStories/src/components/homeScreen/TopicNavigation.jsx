@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const TopicNavigation = () => {
     const [selectedItem,setSelectedItem] = useState(0)
@@ -31,7 +32,11 @@ const TopicNavigation = () => {
     }
     return (
         <ul style={ulStyles}>
-            {list.map((item,index)=><li onClick={()=>handleSelect(index)} style={{...liStyles,...(selectedItem===index?selectedStyles:{})}} key={index}>{item}</li>)}
+            {list.map((item,index)=>{
+                return <Link key={index}  style={{ color: "blue", textDecoration: "none" }} to={{pathname:`/${item}`}}>
+                    <li onClick={()=>handleSelect(index)} style={{...liStyles,...(selectedItem===index?selectedStyles:{})}} >{item}</li>
+                </Link>
+            })}
         </ul>
     )
 }

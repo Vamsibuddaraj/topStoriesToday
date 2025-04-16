@@ -14,6 +14,7 @@ import PlotChart from "../moneyMarket/PlotChart";
 import { useState } from "react";
 import TopicNavigation from "./TopicNavigation";
 import MenuIcon from '@mui/icons-material/Menu';
+import { Outlet } from "react-router-dom";
 
 
 const Search = styled("div")(({theme})=>({
@@ -52,8 +53,6 @@ const InputBaseStyled = styled(InputBase)(({theme})=>({
   },
 }))
 const HomePage = () => {
-        const [displayNameMatch,setDisplayNameMatch] = useState("")
-        const [menuOpenTwo,setMenuOpenTwo] = useState(false)
     const {data:data1,loading,error} = useFetch(NEWSURL,"news")
     const data = data1?.filter((arti)=>arti.type==="article"&&arti.images) || null
     return (
@@ -100,16 +99,8 @@ const HomePage = () => {
                 </Typography> */}
                 <TopicNavigation />
                 <Divider/>
-                <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
-                    <MainCard />
-                    <SportsCard />
-                    <CurrencyCard setMenuOpenTwo={()=>setMenuOpenTwo(true)} setDisplayNameMatch={(displayName)=>setDisplayNameMatch(displayName)}/>
-                    {menuOpenTwo&&     
-                        <CustomModalLike updateMenu={()=>setMenuOpenTwo(false)}>
-                            <PlotChart displayName={displayNameMatch}/>
-                        </CustomModalLike>
-                    }
-                </Box>
+                <Outlet />
+
             </Card>
             {/* <Divider /> */}
             <Card elevation={4} sx={{marginTop:"20px",padding:"10px"}}>
@@ -123,6 +114,23 @@ const HomePage = () => {
 
 
         </Container>
+    )
+}
+
+export const Trending = () => {
+    const [displayNameMatch,setDisplayNameMatch] = useState("")
+    const [menuOpenTwo,setMenuOpenTwo] = useState(false)
+    return (
+        <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",marginTop:"30px",justifyContent:"space-around"}}>
+            <MainCard />
+            <SportsCard />
+            <CurrencyCard setMenuOpenTwo={()=>setMenuOpenTwo(true)} setDisplayNameMatch={(displayName)=>setDisplayNameMatch(displayName)}/>
+            {menuOpenTwo&&     
+                <CustomModalLike updateMenu={()=>setMenuOpenTwo(false)}>
+                    <PlotChart displayName={displayNameMatch}/>
+                </CustomModalLike>
+            }
+        </Box>
     )
 }
 
